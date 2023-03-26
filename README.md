@@ -15,3 +15,9 @@
     - `> pip install -r requirements.txt`
 1. Run the game
     - `> python -m game`
+
+## Submitting Pull Requests
+
+1. Write your code in your personal fork.
+1. Push the changes to your fork's Github repo.
+1. Use the Github web interface to submit a pull request into the `main` branch of the project's repo.
