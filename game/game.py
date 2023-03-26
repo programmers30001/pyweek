@@ -29,7 +29,7 @@ class Game:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.is_playing=True
+                    self.is_playing=1-self.is_playing
 
 
     def update(self):
