@@ -1,7 +1,7 @@
 import sys
 import pygame
 from game.screens.title import TitleScreen
-
+from game.screens.game_screen import GameScreen
 class Game:
     def __init__(self, width=604, height=480, caption="In The Shadows"):
         pygame.init()
@@ -12,6 +12,7 @@ class Game:
         self.font = pygame.font.Font(None, 50)
 
         self.title_screen = TitleScreen(width, height)
+        self.game_screen=GameScreen(width,height)
         self.is_playing = False
 
     def run(self):
@@ -37,7 +38,7 @@ class Game:
 
     def draw(self):
         if self.is_playing:
-            self.screen.fill([255,0,0])
+            self.game_screen.display(self.window_size[0],self.window_size[1])
         else:
             self.title_screen.display(self.window_size[0],self.window_size[1])
 
