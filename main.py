@@ -51,5 +51,5 @@ while True:
         lastpressed=False
     pygame.display.update()
     clock.tick(30)
-print("himom")
+
 pygame.quit()

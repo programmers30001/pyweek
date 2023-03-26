@@ -6,8 +6,8 @@ class Game:
     def __init__(self, width=604, height=480, caption="In The Shadows"):
         pygame.init()
         pygame.display.set_caption(caption)
-
-        self.screen = pygame.display.set_mode((width, height))
+        self.window_size=[width, height]
+        self.screen = pygame.display.set_mode(self.window_size,pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font(None, 50)
 
@@ -26,15 +26,20 @@ class Game:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.is_playing=True
+            elif event.type == pygame.VIDEORESIZE:
+                self.window_size = event.size
 
     def update(self):
         pass
 
     def draw(self):
         if self.is_playing:
-            print()
+            self.screen.fill([255,0,0])
         else:
-            self.title_screen.display()
+            self.title_screen.display(self.window_size[0],self.window_size[1])
 
         pygame.display.flip()
 
