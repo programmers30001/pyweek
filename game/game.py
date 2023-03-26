@@ -7,7 +7,7 @@ class Game:
         pygame.init()
         pygame.display.set_caption(caption)
         self.window_size=[width, height]
-        self.screen = pygame.display.set_mode(self.window_size,pygame.RESIZABLE)
+        self.screen = pygame.display.set_mode(self.window_size)
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font(None, 50)
 
@@ -30,17 +30,16 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.is_playing=True
-            elif event.type == pygame.VIDEORESIZE:
-                self.window_size = event.size
+
 
     def update(self):
         pass
 
     def draw(self):
         if self.is_playing:
-            self.game_screen.display(self.window_size[0],self.window_size[1])
+            self.game_screen.display()
         else:
-            self.title_screen.display(self.window_size[0],self.window_size[1])
+            self.title_screen.display()
 
         pygame.display.flip()
 
