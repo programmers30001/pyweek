@@ -1,4 +1,5 @@
 import pygame
+from pyweek.polygon import Polygon
 screensize = [1200, 800]
 pygame.init()
 screen = pygame.display.set_mode(screensize,pygame.RESIZABLE)
@@ -12,19 +13,6 @@ jesus=[0,0]
 point=[0,0]
 reference=[0,0]
 
-
-class Polygon:
-    def __init__(self, sides, color,screen):
-        self.sides = sides
-        self.color=color
-        self.screen=screen
-
-    def draw(self,x,y,zoom,point):
-        scaledsides=[]
-
-        for i in self.sides:
-            scaledsides.append([x+(i[0]-point[0])*zoom**2,y+(i[1]-point[1])*zoom**2])
-        pygame.draw.polygon(self.screen, self.color,scaledsides)
 
 poly_a=Polygon([[0,200],[200,300],[200,0]],(233,0,0),screen)
 
@@ -63,4 +51,5 @@ while True:
         lastpressed=False
     pygame.display.update()
     clock.tick(30)
+print("himom")
 pygame.quit()
