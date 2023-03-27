@@ -2,6 +2,8 @@ import sys
 import pygame
 from game.screens.title import TitleScreen
 from game.screens.game_screen import GameScreen
+from pygame import gfxdraw
+import numpy as np
 class Game:
     def __init__(self, width=604, height=480, caption="In The Shadows"):
         pygame.init()

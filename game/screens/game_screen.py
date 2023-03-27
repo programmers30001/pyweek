@@ -1,5 +1,6 @@
 import pygame
-
+from pygame import gfxdraw
+import numpy as np
 class GameScreen:
     def __init__(self, width, height):
         self.width = width
@@ -10,11 +11,20 @@ class GameScreen:
         self.title_text = self.font.render("you are playing!", True, (255, 255, 255))
 
         self.play_text = self.font.render("having fun?", True, (255, 255, 255))
-
+        self.radius=40
     def display(self):
-            self.title_rect = self.title_text.get_rect(center=(self.width // 2, self.height // 3))
-            self.play_rect = self.play_text.get_rect(center=(self.width // 2, self.height // 2))
+        img = pygame.image.load("spacestation.jpg").convert()
 
-            self.screen.fill((0, 0, 0))
-            self.screen.blit(self.title_text, self.title_rect)
-            self.screen.blit(self.play_text, self.play_rect)
+        a, b = pygame.mouse.get_pos()
+        self.screen.blit(img,(0,0))
+        for i in range(self.width):
+            for j in range(self.height):
+                if ((i-a)**2+(j-b)**2)**0.5<self.radius:
+                    self.drawpixel(pygame.Surface.get_at(self.screen, (i, j))[:3],(i,j))
+
+                else:
+                    self.drawpixel([0,0,0],(i,j))
+
+
+    def drawpixel(self,color, pos):
+        pygame.draw.line(self.screen, color, pos, pos)
