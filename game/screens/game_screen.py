@@ -21,7 +21,7 @@ class GameScreen:
         self.screen.fill([0,0,0])
         a, b = pygame.mouse.get_pos()
         if a<self.arr.shape[0]-self.radius and b<self.arr.shape[1]+self.radius:
-            visionlight.see(self.width,self.height,self.screen,a,b,self.radius,self.arr)
+            visionlight.see(self.screen,a,b,self.radius,self.arr)
 
     def drawpixel(self,color, pos):
         pygame.draw.line(self.screen, color, pos, pos)
