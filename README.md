@@ -14,7 +14,7 @@
 1. Install project dependencies
     - `> pip install -r requirements.txt`
 1. Run the game
-    - `> python -m game`
+    - `> python main.py`
 
 ## Submitting Pull Requests
 
