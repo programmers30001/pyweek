@@ -8,7 +8,7 @@ class GameScreen:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.font = pygame.font.Font(None, 50)
-        self.radius = 40
+
         self.arr = []
 
         background = pygame.image.load("images/spacestation.png")
@@ -16,9 +16,9 @@ class GameScreen:
 
         key = pygame.image.load("images/key.png")
         self.key = pygame.transform.scale(key, (25, 30))
-        self.battery=1000
+        self.battery=10000000
         self.used=0
-    def display(self,lighton):
+    def display(self,lighton,radius):
         self.screen.fill([0, 0, 0])
 
         # put objects onto the background before calling array3d()
@@ -27,12 +27,12 @@ class GameScreen:
         # use native pygame functions to convert to a pixel array
         self.arr = pygame.surfarray.array3d(self.background)
         a, b = pygame.mouse.get_pos()
-        
+
         #if a < self.arr.shape[0] - self.radius and b < self.arr.shape[1] + self.radius:
         if lighton and random.random()<0.95 and self.used/self.battery<1:
-            self.used+=1
-            self.see(self.screen, a, b, self.radius, self.arr)
-        print(self.used/self.battery*100,"%")
+            self.used+=1*radius*radius*3.14159265358979323
+            self.see(self.screen, a, b,radius, self.arr)
+        print(round(self.used/self.battery*100,2),"%")
     def see(self, screen, a, b, radius, pixels):
         for i in range(max(0,a - radius),min(self.arr.shape[0], a + radius)):
             # fixes error if moving the cursor down off the screen

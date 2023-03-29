@@ -17,6 +17,7 @@ class Game:
         self.game_screen=GameScreen(width,height)
         self.is_playing = False
         self.lighton=1
+        self.radius=30
     def run(self):
         while True:
             self.clock.tick(60)
@@ -34,13 +35,18 @@ class Game:
                     self.is_playing=1-self.is_playing
                 elif event.key==pygame.K_f:
                     self.lighton=1-self.lighton
-
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button==4 or event.button==5:
+                    if event.button == 4 and self.radius<80:
+                        self.radius +=5
+                    if event.button == 5 and self.radius>10 :
+                        self.radius-=5
     def update(self):
         pass
 
     def draw(self):
         if self.is_playing:
-            self.game_screen.display(self.lighton)
+            self.game_screen.display(self.lighton,self.radius)
         else:
             self.title_screen.display()
 
