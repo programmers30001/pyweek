@@ -27,11 +27,12 @@ class GameScreen:
         # use native pygame functions to convert to a pixel array
         self.arr = pygame.surfarray.array3d(self.background)
         a, b = pygame.mouse.get_pos()
-
+        
         #if a < self.arr.shape[0] - self.radius and b < self.arr.shape[1] + self.radius:
-        if lighton and random.random()<0.90:
+        if lighton and random.random()<0.95 and self.used/self.battery<1:
+            self.used+=1
             self.see(self.screen, a, b, self.radius, self.arr)
-
+        print(self.used/self.battery*100,"%")
     def see(self, screen, a, b, radius, pixels):
         for i in range(max(0,a - radius),min(self.arr.shape[0], a + radius)):
             # fixes error if moving the cursor down off the screen

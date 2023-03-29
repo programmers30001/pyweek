@@ -16,7 +16,7 @@ class Game:
         self.title_screen = TitleScreen(width, height)
         self.game_screen=GameScreen(width,height)
         self.is_playing = False
-
+        self.lighton=1
     def run(self):
         while True:
             self.clock.tick(60)
@@ -32,14 +32,15 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.is_playing=1-self.is_playing
-
+                elif event.key==pygame.K_f:
+                    self.lighton=1-self.lighton
 
     def update(self):
         pass
 
     def draw(self):
         if self.is_playing:
-            self.game_screen.display(1)
+            self.game_screen.display(self.lighton)
         else:
             self.title_screen.display()
 
