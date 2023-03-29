@@ -1,7 +1,7 @@
 import sys
 import pygame
 from game.screens.title import TitleScreen
-from game.screens.game_screen import GameScreen
+from game.screens.spaceship import GameScreen
 from pygame import gfxdraw
 import numpy as np
 class Game:
