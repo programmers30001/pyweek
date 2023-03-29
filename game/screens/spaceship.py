@@ -23,6 +23,10 @@ class GameScreen:
 
         # put objects onto the background before calling array3d()
         self.background.blit(self.key, (0, 0))
+        color = (255*self.used/self.battery, 255*(1-self.used/self.battery), 0)
+
+        # Drawing Rectangle
+        pygame.draw.rect(self.screen, color, pygame.Rect(self.width*1/3, 0, self.width/3*(1-self.used/self.battery), 60))
 
         # use native pygame functions to convert to a pixel array
         self.arr = pygame.surfarray.array3d(self.background)
