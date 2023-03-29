@@ -1,6 +1,6 @@
 
 import pygame
-
+import random
 
 class GameScreen:
     def __init__(self, width, height):
@@ -16,8 +16,9 @@ class GameScreen:
 
         key = pygame.image.load("images/key.png")
         self.key = pygame.transform.scale(key, (25, 30))
-
-    def display(self):
+        self.battery=1000
+        self.used=0
+    def display(self,lighton):
         self.screen.fill([0, 0, 0])
 
         # put objects onto the background before calling array3d()
@@ -27,11 +28,12 @@ class GameScreen:
         self.arr = pygame.surfarray.array3d(self.background)
         a, b = pygame.mouse.get_pos()
 
-        if a < self.arr.shape[0] - self.radius and b < self.arr.shape[1] + self.radius:
+        #if a < self.arr.shape[0] - self.radius and b < self.arr.shape[1] + self.radius:
+        if lighton and random.random()<0.90:
             self.see(self.screen, a, b, self.radius, self.arr)
 
     def see(self, screen, a, b, radius, pixels):
-        for i in range(a - radius, a + radius):
+        for i in range(max(0,a - radius),min(self.arr.shape[0], a + radius)):
             # fixes error if moving the cursor down off the screen
             for j in range(max(0, b - radius), min(self.arr.shape[1], b + radius)):
                 if ((i - a) ** 2 + (j - b) ** 2) ** 0.5 < radius:

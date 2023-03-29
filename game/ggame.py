@@ -39,7 +39,7 @@ class Game:
 
     def draw(self):
         if self.is_playing:
-            self.game_screen.display()
+            self.game_screen.display(1)
         else:
             self.title_screen.display()
 
