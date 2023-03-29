@@ -11,23 +11,28 @@ class GameScreen:
 
         self.arr = []
         self.backgrounds=[]
-        background = pygame.image.load("images/first_room.png")
-        self.backgrounds.append(background)
-        self.background = pygame.transform.scale(background, (width, height))
+        self.background = pygame.image.load("images/first_room.png")
+        self.backgrounds.append(self.background)
+        self.background = pygame.transform.scale(self.background, (width, height))
 
         key = pygame.image.load("images/key.png")
         self.key = pygame.transform.scale(key, (25, 30))
         self.battery=10000000
         self.used=0
         self.xkey=random.randint(0,self.width-30)
-        self.ykey=0
+        self.ykey=random.randint(0,self.height-30)
         self.gotkey=0
+        self.widthkey=25
+        self.heightkey=30
     def display(self,lighton,radius):
         self.screen.fill([0, 0, 0])
 
         # put objects onto the background before calling array3d()
         if not self.gotkey:
             self.background.blit(self.key, (self.xkey, self.ykey))
+
+        a, b = pygame.mouse.get_pos()
+        self.clickedkey(a,b)
         color = (255*self.used/self.battery, 255*(1-self.used/self.battery), 0)
 
         # Drawing Rectangle
@@ -36,13 +41,13 @@ class GameScreen:
 
         # use native pygame functions to convert to a pixel array
         self.arr = pygame.surfarray.array3d(self.background)
-        a, b = pygame.mouse.get_pos()
+
 
         #if a < self.arr.shape[0] - self.radius and b < self.arr.shape[1] + self.radius:
         if lighton and random.random()<0.95 and self.used/self.battery<1:
             self.used+=1*radius*radius*3.14159265358979323
             self.see(self.screen, a, b,radius, self.arr)
-        print(round(self.used/self.battery*100,2),"%")
+
     def see(self, screen, a, b, radius, pixels):
         for i in range(max(0,a - radius),min(self.arr.shape[0], a + radius)):
             # fixes error if moving the cursor down off the screen
@@ -51,4 +56,7 @@ class GameScreen:
                     pygame.draw.line(screen, pixels[i][j], (i, j), (i, j))
 
     def clickedkey(self,a,b):
-        pass
+        if a>self.xkey and a<self.widthkey+self.xkey and b>self.ykey and b<self.heightkey+self.ykey:
+            self.gotkey=1
+            self.background = pygame.image.load("images/first_room.png")
+            self.background = pygame.transform.scale(self.background, (self.width, self.height))
